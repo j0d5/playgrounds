@@ -35,13 +35,12 @@ func foo(bar: AnyObject) -> AnyObject { return bar}
 
 
 /// This is an enum which tries to describe various types of tea.
-///
-/// - green: A tea that consists of green tea leafs
-/// - black: A tea that consists of black tea leafs
-/// - fruit: A tea that consists of various fruits and leafs
 enum TeaType: CustomStringConvertible {
+    /// A tea that consists of green tea leafs
     case green
+    /// A tea that consists of black tea leafs
     case black
+    /// A tea that consists of various fruits and leafs
     case fruit
     
     /// Returns the type as string
