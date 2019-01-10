@@ -19,3 +19,5 @@ print(String(test, radix: 2))
 print("0\(String(bit, radix: 2))")
 print(String(xorBit, radix: 2))
 
+var shiftTest = 0
+shiftTest = 1 << 5
