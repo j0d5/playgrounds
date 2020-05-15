@@ -2,10 +2,10 @@ import Foundation
 
 let sizeOfArray = 100
 
-func measure(name: String, function: (Int) -> [Int]) {
+func measure(function: (Int) -> [Int]) -> CFAbsoluteTime {
     let start = CFAbsoluteTimeGetCurrent()
     function(sizeOfArray)
-    print("\(name) took \(CFAbsoluteTimeGetCurrent() - start) seconds\n")
+    return CFAbsoluteTimeGetCurrent() - start
 }
 
 // MARK: - simpleUniqueRandomArray
@@ -22,7 +22,7 @@ func simpleUniqueRandomArray(size: Int) -> [Int] {
     return randomArray
 }
 
-measure(name: "simpleUniqueRandomArray", function: simpleUniqueRandomArray)
+print("simpleUniqueRandomArray took \(measure(function: simpleUniqueRandomArray)) seconds\n")
 
 // MARK: - setUniqueRandomArray
 func setUniqueRandomArray(size: Int) -> [Int] {
@@ -41,7 +41,7 @@ func setUniqueRandomArray(size: Int) -> [Int] {
     return randomArray
 }
 
-measure(name: "setUniqueRandomArray", function: setUniqueRandomArray)
+print("setUniqueRandomArray took \(measure(function: setUniqueRandomArray)) seconds\n")
 
 // MARK: - shuffleUniqueRandomNumberArray
 func shuffleUniqueRandomNumberArray(size: Int) -> [Int] {
@@ -55,11 +55,11 @@ func shuffleUniqueRandomNumberArray(size: Int) -> [Int] {
     return randomArray
 }
 
-measure(name: "shuffleUniqueRandomNumberArray", function: shuffleUniqueRandomNumberArray)
+print("shuffleUniqueRandomNumberArray took \(measure(function: shuffleUniqueRandomNumberArray)) seconds\n")
 
 // MARK: - swiftShuffleUniqueRandomNumberArray
 func swiftShuffleUniqueRandomNumberArray(size: Int) -> [Int] {
     return Array(0..<size).shuffled()
 }
 
-measure(name: "swiftShuffleUniqueRandomNumberArray", function: swiftShuffleUniqueRandomNumberArray)
+print("swiftShuffleUniqueRandomNumberArray took \(measure(function: swiftShuffleUniqueRandomNumberArray)) seconds\n")

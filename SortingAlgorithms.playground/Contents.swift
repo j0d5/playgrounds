@@ -2,10 +2,10 @@ import Foundation
 
 let list = [ 10, 0, 3, 9, 2, 14, 8, 27, 1, 5, 8, -1, 26 ]
 
-func measure(name: String, function: ([Int]) -> [Int]) {
+func measure(function: ([Int]) -> [Int]) -> CFAbsoluteTime {
     let start = CFAbsoluteTimeGetCurrent()
     function(list)
-    print("\(name) took \(CFAbsoluteTimeGetCurrent() - start) seconds\n")
+    return CFAbsoluteTimeGetCurrent() - start
 }
 
 // MARK: - QuickSort
@@ -20,7 +20,7 @@ func quickSort<T: Comparable>(_ a: [T]) -> [T] {
   return quickSort(less) + equal + quickSort(greater)
 }
 
-measure(name: "quickSort", function: quickSort)
+print("quickSort took \(measure(function: quickSort)) seconds\n")
 
 // MARK: - BubbleSort
 func bubbleSort(arrayToSort: [Int]) -> [Int] {
@@ -37,4 +37,4 @@ func bubbleSort(arrayToSort: [Int]) -> [Int] {
     return array
 }
 
-measure(name: "bubbleSort", function: bubbleSort)
+print("bubbleSort took \(measure(function: bubbleSort)) seconds\n")
