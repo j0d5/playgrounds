@@ -2,6 +2,12 @@ import Foundation
 
 let sizeOfArray = 100
 
+func measure(name: String, function: @escaping (Int) -> [Int]) {
+    let start = CFAbsoluteTimeGetCurrent()
+    function(sizeOfArray)
+    print("\(name) took \(CFAbsoluteTimeGetCurrent() - start) seconds\n")
+}
+
 // MARK: - simpleUniqueRandomArray
 func simpleUniqueRandomArray(size: Int) -> [Int] {
     var randomArray: Array<Int> = []
@@ -16,10 +22,7 @@ func simpleUniqueRandomArray(size: Int) -> [Int] {
     return randomArray
 }
 
-var start = CFAbsoluteTimeGetCurrent()
-print("simpleUniqueRandomArray elements:\n\(simpleUniqueRandomArray(size: sizeOfArray))\n")
-var diff = CFAbsoluteTimeGetCurrent() - start
-print("simpleUniqueRandomArray took \(diff) seconds\n")
+measure(name: "simpleUniqueRandomArray", function: simpleUniqueRandomArray)
 
 // MARK: - setUniqueRandomArray
 func setUniqueRandomArray(size: Int) -> [Int] {
@@ -38,17 +41,25 @@ func setUniqueRandomArray(size: Int) -> [Int] {
     return randomArray
 }
 
-start = CFAbsoluteTimeGetCurrent()
-print("setUniqueRandomArray elements:\n\(setUniqueRandomArray(size: sizeOfArray))\n")
-diff = CFAbsoluteTimeGetCurrent() - start
-print("setUniqueRandomArray took \(diff) seconds\n")
+measure(name: "setUniqueRandomArray", function: setUniqueRandomArray)
 
 // MARK: - shuffleUniqueRandomNumberArray
 func shuffleUniqueRandomNumberArray(size: Int) -> [Int] {
+    var randomArray = Array<Int>(0..<size)
+    for i in 0..<size {
+        let j = Int.random(in: 0..<size)
+        let tempI = randomArray[i]
+        randomArray[i] = randomArray[j]
+        randomArray[j] = tempI
+    }
+    return randomArray
+}
+
+measure(name: "shuffleUniqueRandomNumberArray", function: shuffleUniqueRandomNumberArray)
+
+// MARK: - swiftShuffleUniqueRandomNumberArray
+func swiftShuffleUniqueRandomNumberArray(size: Int) -> [Int] {
     return Array(0..<size).shuffled()
 }
 
-start = CFAbsoluteTimeGetCurrent()
-print("shuffleUniqueRandomNumberArray elements:\n\(shuffleUniqueRandomNumberArray(size: sizeOfArray)))\n")
-diff = CFAbsoluteTimeGetCurrent() - start
-print("shuffleUniqueRandomNumberArray took \(diff) seconds\n")
+measure(name: "swiftShuffleUniqueRandomNumberArray", function: swiftShuffleUniqueRandomNumberArray)
