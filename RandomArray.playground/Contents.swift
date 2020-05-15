@@ -2,7 +2,7 @@ import Foundation
 
 let sizeOfArray = 100
 
-func measure(name: String, function: @escaping (Int) -> [Int]) {
+func measure(name: String, function: (Int) -> [Int]) {
     let start = CFAbsoluteTimeGetCurrent()
     function(sizeOfArray)
     print("\(name) took \(CFAbsoluteTimeGetCurrent() - start) seconds\n")
