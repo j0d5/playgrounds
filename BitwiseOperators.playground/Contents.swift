@@ -21,3 +21,9 @@ print(String(xorBit, radix: 2))
 
 var shiftTest = 0
 shiftTest = 1 << 5
+
+
+var jumpBackMethod = 15
+var MSAJumpBackACK = 0b0110
+
+let result = (jumpBackMethod & MSAJumpBackACK) == MSAJumpBackACK
